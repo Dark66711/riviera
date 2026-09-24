@@ -50,13 +50,17 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled || open
-          ? "border-b border-riviera-wood/15 bg-riviera-charcoal/86 shadow-[0_14px_38px_rgba(0,0,0,0.34)] backdrop-blur-xl"
-          : "bg-transparent"
+      className={`fixed top-0 transition-all duration-300 ${
+        open
+          ? "inset-0 z-[120] overflow-y-auto border-b border-riviera-wood/15 bg-riviera-charcoal shadow-[0_14px_38px_rgba(0,0,0,0.34)] lg:inset-x-0 lg:bottom-auto lg:z-50 lg:overflow-visible"
+          : `inset-x-0 z-50 ${
+              scrolled
+                ? "border-b border-riviera-wood/15 bg-riviera-charcoal/86 shadow-[0_14px_38px_rgba(0,0,0,0.34)] backdrop-blur-xl"
+                : "bg-transparent"
+            }`
       }`}
     >
-      <nav className="container-x flex h-24 items-center justify-between">
+      <nav className="container-x flex h-24 items-center justify-between border-b border-transparent">
         <Link className="focus-ring flex items-center gap-3 rounded-2xl p-1 transition duration-300 hover:scale-[1.018]" href="/" aria-label="Riviera inicio">
           <Image src="/brand/riviera-logo.webp" alt="Logo Riviera" width={156} height={96} priority className="h-16 w-28 rounded-2xl border border-riviera-wood/20 object-cover shadow-soft sm:w-32" />
         </Link>
@@ -84,12 +88,12 @@ export function Navbar() {
       </nav>
 
       {open && (
-        <Motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 top-24 z-40 bg-riviera-charcoal lg:hidden">
-          <div className="container-x flex h-[calc(100dvh-6rem)] flex-col justify-between py-8">
-            <div className="space-y-1">
+        <Motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="relative z-[121] border-t border-riviera-wood/15 bg-riviera-charcoal lg:hidden">
+          <div className="container-x flex min-h-[calc(100dvh-6rem)] flex-col justify-between py-7">
+            <div className="space-y-2">
               {links.map(([label, href], index) => (
                 <Motion.div key={href} initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: index * 0.055 }}>
-                  <Link href={href} className="focus-ring block rounded-3xl px-2 py-3 font-display text-5xl font-bold leading-none text-riviera-warm">
+                  <Link href={href} className="focus-ring block rounded-2xl px-2 py-2 font-display text-[clamp(2.5rem,12vw,4.25rem)] font-bold leading-[0.95] text-riviera-warm">
                     {label}
                   </Link>
                 </Motion.div>
